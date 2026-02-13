@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">The Third Eye</string>
+    <!-- Main Text -->
+    <color name="text_main">#FFFFFF</color>
+
+    <!-- Sub Text -->
+    <color name="text_sub">#C7C9D9</color>
+
+    <!-- Hint Text -->
+    <color name="text_hint">#9CA3AF</color>
+
+    <!-- Link Text -->
+    <color name="text_link">#3BB3FF</color>
+
+    <!-- Button Text -->
+    <color name="text_button">#FFFFFF</color>
+
+    <!-- Error Text -->
+    <color name="text_error">#FF6B6B</color>
+
+    <!-- Success Text -->
+    <color name="text_success">#22C55E</color>
+
+    <!-- Disabled Text -->
+    <color name="text_disable">#6B7280</color>
+    <!-- Brand Colors -->
+    <color name="sutrio_blue">#3BB3FF</color>
+    <color name="sutrio_purple">#9B5CFF</color>
+    <color name="sutrio_purple_light">#C77DFF</color>
+    <color name="sutrio_dark">#0A0F24</color>
+
+    <!-- Background Shades -->
+    <color name="bg_dark_primary">#0A0F24</color>
+    <color name="bg_dark_secondary">#1E1445</color>
+    <color name="bg_dark_tertiary">#2A1458</color>
+
+    <!-- Text / String Colors -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#C7C9D9</color>
+    <color name="text_disabled">#6B7280</color>
+
+
+    <!-- Input / Card Colors -->
+    <color name="input_background">#11162F</color>
+    <color name="input_border_focus">#3BB3FF</color>
+    <color name="card_background">#11162F</color>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
