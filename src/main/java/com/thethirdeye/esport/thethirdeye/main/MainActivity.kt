@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        loadFragment(TournamentFragment())
+loadFragment(TournamentFragment())
 
         findViewById<BottomNavigationView>(R.id.bottomNav)
             .setOnItemSelectedListener {

@@ -19,6 +19,5 @@ class MatchHistoryActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
     }
-
-
 }
+

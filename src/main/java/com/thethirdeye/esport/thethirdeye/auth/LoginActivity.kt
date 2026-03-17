@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.thethirdeye.esport.thethirdeye.admin.AdminMainActivity
 import com.thethirdeye.esport.thethirdeye.databinding.ActivityLoginBinding
 import com.thethirdeye.esport.thethirdeye.main.MainActivity
 
@@ -13,6 +15,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,21 +45,53 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
         if (auth.currentUser != null) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            checkUserRole(auth.currentUser!!.uid)
         }
     }
 
     private fun loginUser(email: String, password: String) {
+
         auth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
-                toast("Login Successful")
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+
+                val uid = auth.currentUser!!.uid
+                checkUserRole(uid)
+
             }
             .addOnFailureListener {
                 toast(it.message ?: "Login Failed")
+            }
+    }
+
+    private fun checkUserRole(uid: String) {
+
+        db.collection("users")
+            .document(uid)
+            .get()
+            .addOnSuccessListener { doc ->
+
+                val role = doc.getString("role")
+
+                if (role == "admin") {
+
+                    startActivity(
+                        Intent(this, AdminMainActivity::class.java)
+                    )
+
+                } else {
+
+                    startActivity(
+                        Intent(this, MainActivity::class.java)
+                    )
+
+                }
+
+                finish()
+            }
+            .addOnFailureListener {
+                toast("Failed to fetch role")
             }
     }
 

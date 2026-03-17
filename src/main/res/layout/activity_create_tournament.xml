@@ -13,9 +13,10 @@
 
         <!-- Header -->
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Create Tournament"
+            android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
@@ -34,6 +35,28 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="20dp">
+
+                <!-- Tournament Image -->
+                <ImageView
+                    android:id="@+id/imgTournament"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_app_logo"
+                    android:background="#EEEEEE"/>
+
+                <!-- Select Image Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSelectImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select Image"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/bg_dark_tertiary"
+                    android:layout_marginTop="10dp"
+                    app:cornerRadius="12dp"/>
+
+
 
                 <!-- Tournament Title -->
                 <com.google.android.material.textfield.TextInputLayout
@@ -106,6 +129,27 @@
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Description -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="Tournament Description"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minLines="3"
+                        android:gravity="top"
+                        android:inputType="textMultiLine"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Button -->

@@ -1,4 +1,4 @@
-package com.thethirdeye.esport.thethirdeye.tournament
+package com.thethirdeye.esport.thethirdeye.Adaptor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -39,7 +39,7 @@ class TournamentAdapter(private val list: ArrayList<TournamentModel>) :
 
         Glide.with(holder.itemView.context)
             .load(model.image)
-            .placeholder(R.drawable.bgmi_logo)
+            .placeholder(R.drawable.img_app_logo)
             .into(holder.binding.imgTournament)
     }
 }

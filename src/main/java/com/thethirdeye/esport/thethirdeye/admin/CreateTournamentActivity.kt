@@ -1,5 +1,6 @@
 package com.thethirdeye.esport.thethirdeye.admin
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,45 +14,43 @@ class CreateTournamentActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityCreateTournamentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnCreate.setOnClickListener {
-            createTournament()
+
+            val title = binding.etTitle.text.toString().trim()
+            val game = binding.etGame.text.toString().trim()
+            val prize = binding.etPrize.text.toString().trim()
+            val entry = binding.etEntry.text.toString().trim()
+            val description = binding.etDescription.text.toString().trim()
+
+            val tournament = HashMap<String, Any>()
+
+            tournament["title"] = title
+            tournament["game"] = game
+            tournament["prize"] = prize
+            tournament["entry"] = entry
+            tournament["description"] = description
+            tournament["image"] = ""
+
+            db.collection("tournaments")
+                .add(tournament)
+                .addOnSuccessListener {
+
+                    Toast.makeText(this, "Tournament Created", Toast.LENGTH_SHORT).show()
+
+                    // All Tournament Page open
+                    startActivity(
+                        Intent(this, AllTournamentActivity::class.java)
+                    )
+
+                    finish() // current activity close
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                }
         }
-    }
-
-    private fun createTournament() {
-        val title = binding.etTitle.text.toString()
-        val game = binding.etGame.text.toString()
-        val prize = binding.etPrize.text.toString()
-        val entry = binding.etEntry.text.toString()
-
-        if (title.isEmpty() || game.isEmpty()) {
-            toast("Fill all fields")
-            return
-        }
-
-        val map = hashMapOf(
-            "title" to title,
-            "game" to game,
-            "prizePool" to prize,
-            "entryFee" to entry,
-            "status" to "OPEN"
-        )
-
-        db.collection("tournaments")
-            .add(map)
-            .addOnSuccessListener {
-                toast("Tournament Created")
-                finish()
-            }
-            .addOnFailureListener {
-                toast(it.message ?: "Error")
-            }
-    }
-
-    private fun toast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 }

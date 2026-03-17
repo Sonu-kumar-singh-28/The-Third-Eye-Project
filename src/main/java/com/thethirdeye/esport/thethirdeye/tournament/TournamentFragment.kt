@@ -8,13 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.thethirdeye.esport.thethirdeye.databinding.FragmentTournamentBinding
-import com.thethirdeye.esport.thethirdeye.model.Tournament
+import com.thethirdeye.esport.thethirdeye.model.TournamentModel
 
 class TournamentFragment : Fragment() {
 
     private lateinit var binding: FragmentTournamentBinding
     private lateinit var adapter: TournamentAdapter
-    private val tournamentList = mutableListOf<Tournament>()
+
+    private val tournamentList = ArrayList<TournamentModel>()
+
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
@@ -26,6 +28,7 @@ class TournamentFragment : Fragment() {
         binding = FragmentTournamentBinding.inflate(inflater, container, false)
 
         adapter = TournamentAdapter(tournamentList)
+
         binding.rvTournaments.layoutManager = LinearLayoutManager(requireContext())
         binding.rvTournaments.adapter = adapter
 
@@ -35,24 +38,28 @@ class TournamentFragment : Fragment() {
     }
 
     private fun loadTournaments() {
+
         db.collection("tournaments")
             .get()
-            .addOnSuccessListener { snapshot ->
+            .addOnSuccessListener { result ->
+
                 tournamentList.clear()
 
-                snapshot.documents.forEach { doc ->
-                    try {
-                        val tournament = doc.toObject(Tournament::class.java)
-                        tournament?.let { tournamentList.add(it) }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
+                for (doc in result.documents) {
+
+                    val model = TournamentModel(
+                        doc.getString("title") ?: "",
+                        doc.getString("game") ?: "",
+                        doc.getString("prize") ?: "",
+                        doc.getString("entry") ?: "",
+                        doc.getString("description") ?: "",
+                        doc.getString("image") ?: ""
+                    )
+
+                    tournamentList.add(model)
                 }
 
                 adapter.notifyDataSetChanged()
-            }
-            .addOnFailureListener {
-                it.printStackTrace()
             }
     }
 }
