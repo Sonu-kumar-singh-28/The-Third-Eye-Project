@@ -1,4 +1,4 @@
-🕹️ The Third Eye – Unified Esports Ecosystem
+🕹️ The Third Eye – Unified Esports Ecosystem.
 
 A full-stack esports tournament management platform for BGMI using Kotlin, Jetpack Compose, Firebase & REST APIs.
 
